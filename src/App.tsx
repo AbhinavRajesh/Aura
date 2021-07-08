@@ -1,26 +1,39 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import { BrowserRouter, Route, Switch, useHistory } from "react-router-dom";
+import Home from "./pages/index";
+import "./App.scss";
+import { SignedIn, SignedOut, ClerkProvider } from "@clerk/clerk-react";
+import Dashboard from "./pages/dashboard";
 
-function App() {
+const App: React.FC = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <BrowserRouter>
+      <Switch>
+        <ClerkProviderWithNavigate>
+          <SignedOut>
+            <Route exact path="/" component={Home} />
+          </SignedOut>
+          <SignedIn>
+            <Route exact path="/" component={Dashboard} />
+          </SignedIn>
+        </ClerkProviderWithNavigate>
+      </Switch>
+    </BrowserRouter>
   );
-}
+};
+
+const ClerkProviderWithNavigate = ({ children }: { children: any }) => {
+  const { push } = useHistory();
+  return (
+    <ClerkProvider
+      frontendApi="clerk.d3lk2.twegb.lcl.dev"
+      navigate={(to) => {
+        return push(to);
+      }}
+    >
+      {children}
+    </ClerkProvider>
+  );
+};
 
 export default App;

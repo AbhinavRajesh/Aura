@@ -1,0 +1,22 @@
+.header {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  min-height: 10vh;
+  nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    h1 {
+      flex: 2;
+    }
+    ul {
+      flex: 1;
+      list-style: none;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+  }
+}
