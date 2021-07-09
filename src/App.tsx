@@ -4,6 +4,7 @@ import Home from "./pages/index";
 import "./App.scss";
 import { SignedIn, SignedOut, ClerkProvider } from "@clerk/clerk-react";
 import Dashboard from "./pages/dashboard";
+import UserProvider from "./context/UserContext";
 
 const App: React.FC = () => {
   return (
@@ -14,7 +15,9 @@ const App: React.FC = () => {
             <Route exact path="/" component={Home} />
           </SignedOut>
           <SignedIn>
-            <Route exact path="/" component={Dashboard} />
+            <UserProvider>
+              <Route exact path="/" component={Dashboard} />
+            </UserProvider>
           </SignedIn>
         </ClerkProviderWithNavigate>
       </Switch>

@@ -1,4 +1,5 @@
 import firebase from "firebase/app";
+import "firebase/firestore";
 // import "firebase/auth";
 // import "firebase/analytics";
 
@@ -13,6 +14,8 @@ if (!firebase.apps.length) {
   });
   //   firebase.analytics();
 }
+
+export const db = firebase.firestore();
 
 // export const auth = firebase.auth();
 export default firebase;
