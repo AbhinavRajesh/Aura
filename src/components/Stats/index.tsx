@@ -7,6 +7,8 @@ import { UserContext } from "../../context/UserContext";
 
 import { Calendar as CalendarInterface, Mood } from "../../types";
 import WeeklyGraph from "../WeeklyGraph";
+import MonthlyGraph from "../MonthlyGraph";
+import YearlyGraph from "../YearlyGraph";
 
 const { Option } = Select;
 
@@ -35,20 +37,15 @@ const Calendar = () => {
   }, [user]);
 
   const getColor = (moodNumber: number): string => {
-    switch (moodNumber) {
-      case 0:
-        return "red";
-      case 1:
-        return "orange";
-      case 2:
-        return "yellow";
-      case 3:
-        return "green";
-      case 4:
-        return "blue";
-      default:
-        return "white";
-    }
+    if (moodNumber === -1) return "white";
+    const colors = [
+      "rgb(255, 99, 132)",
+      "rgb(255, 159, 64)",
+      "rgb(255, 205, 86)",
+      "rgb(75, 192, 192)",
+      "rgb(54, 162, 235)",
+    ];
+    return colors[moodNumber];
   };
 
   const getEmoji = (
@@ -180,8 +177,12 @@ const Calendar = () => {
                 </Tooltip>
               ))}
         </div>
-        <div>
+        <div className="flex flex-col lg:flex-row mt-8 space-y-5 lg:space-y-0 lg:space-x-5">
           <WeeklyGraph />
+          <MonthlyGraph />
+        </div>
+        <div className="mt-4">
+          <YearlyGraph />
         </div>
       </section>
       <AddEditModal

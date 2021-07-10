@@ -6,8 +6,9 @@ import {
   useState,
 } from "react";
 import { useUser } from "@clerk/clerk-react";
-import { DatePicker, Modal, Input } from "antd";
+import { DatePicker, Modal, Input, message } from "antd";
 import moment from "moment";
+import { LoadingOutlined } from "@ant-design/icons";
 
 import { UserContext } from "../../context/UserContext";
 import { User } from "../../types";
@@ -33,6 +34,7 @@ const EditModal = ({
   const [date, setDate] = useState<moment.Moment>(moment);
   const [selected, setSelected] = useState<number>(2);
   const [note, setNote] = useState<string>("");
+  const [loading, setLoading] = useState<boolean>(false);
 
   const { emailAddresses } = useUser();
   const { user, setUser } = useContext(UserContext);
@@ -67,6 +69,7 @@ const EditModal = ({
 
   const addMood = async () => {
     try {
+      setLoading(true);
       const input = {
         mood: selected,
         date: date.dayOfYear(),
@@ -81,16 +84,18 @@ const EditModal = ({
           [date.dayOfYear()]: input,
         };
       }
-      console.log(updatedUser);
-
       await db
         .collection("users")
         .doc(emailAddresses[0].emailAddress)
         .update(updatedUser);
       setUser!(updatedUser);
+      message.success("Mood added succesfully! Carry on with your day :)");
+      setModalVisibility(false);
     } catch (err) {
       console.error(err);
+      message.error("Some error occured. Sorry for ruining your mood :(");
     }
+    setLoading(false);
   };
 
   return (
@@ -100,7 +105,6 @@ const EditModal = ({
       footer={false}
       title={[<span>{isEdit ? "Edit Mood" : "Add Mood to calendar"}</span>]}
       centered
-      zIndex={10000}
     >
       <div className="flex flex-col">
         {!isEdit && (
@@ -142,7 +146,7 @@ const EditModal = ({
           className="px-4 py-2 bg-blue-600 text-white hover:bg-blue-500 rounded mt-4"
           onClick={() => addMood()}
         >
-          {isEdit ? "Edit" : "Add"} Mood
+          {loading && <LoadingOutlined />} {isEdit ? "Edit" : "Add"} Mood
         </button>
       </div>
     </Modal>

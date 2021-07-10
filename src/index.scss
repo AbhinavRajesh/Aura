@@ -29,3 +29,12 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
+
+::-moz-selection {
+  background-color: rgba(255, 99, 132, 0.4);
+  color: white;
+}
+::selection {
+  background-color: rgba(255, 99, 132, 0.4);
+  color: white;
+}
