@@ -6,6 +6,8 @@ import moment from "moment";
 import { Bar } from "react-chartjs-2";
 import { Skeleton } from "antd";
 import { CaretLeftOutlined, CaretRightOutlined } from "@ant-design/icons";
+import { db } from "../../utils/firebase";
+import { User } from "../../types";
 
 interface Data {
   labels: string[];
@@ -15,7 +17,8 @@ interface Data {
 const MonthlyGraph = () => {
   const [data, setData] = useState<Data | null>(null);
   const [offset, setOffset] = useState<number>(0);
-  const { user } = useContext(UserContext);
+  const [month, setMonth] = useState<string>(moment().format("MMMM"));
+  const { user, setUser } = useContext(UserContext);
 
   const options: ChartOptions = {
     plugins: {
@@ -40,29 +43,39 @@ const MonthlyGraph = () => {
   };
 
   useEffect(() => {
-    if (user !== null) getMonths(0);
-  }, [user]);
-
-  useEffect(() => {
     if (user !== null) getMonths(offset);
-  }, [offset]);
+  }, [user, offset]);
 
   const getMonths = (monthOffset: number = 0) => {
     const today = moment().add(monthOffset, "months");
+    setMonth(today.format("MMMM"));
     const startOfMonth = today.startOf("month").dayOfYear();
     const endOfMonth = today.endOf("month").dayOfYear();
+    const year = today.year();
 
-    getData(startOfMonth, endOfMonth);
+    getData(startOfMonth, endOfMonth, year);
   };
 
-  const getData = (startOfMonth: number, endOfMonth: number) => {
+  const getData = async (
+    startOfMonth: number,
+    endOfMonth: number,
+    year: number
+  ) => {
     const tempData: number[] = [0, 0, 0, 0, 0];
     // eslint-disable-next-line array-callback-return
-    Object.values(user![moment().year()]).map((value: any) => {
-      if (value.date >= startOfMonth && value.date <= endOfMonth) {
-        tempData[value.mood] += 1;
-      }
-    });
+    if (user![year]) {
+      Object.values(user![year]).map((value: any) => {
+        if (value.date >= startOfMonth && value.date <= endOfMonth) {
+          tempData[value.mood] += 1;
+        }
+      });
+    } else {
+      await db
+        .collection("users")
+        .doc(user?.email)
+        .update({ ...user, [year]: {} });
+      setUser!({ ...user, [year]: {} } as User);
+    }
     setData({
       labels: ["🙁", "😐", "🙂", "😄", "🤗"],
       datasets: [
@@ -92,9 +105,12 @@ const MonthlyGraph = () => {
 
   return (
     <div className="flex flex-col flex-1 py-5 px-5 bg-white rounded">
-      <div className="flex items-center justify-between mb-4 ">
-        <h3 className="font-bold text-lg flex ">Monthly Mood Graph</h3>
-        <div className="flex items-center">
+      <div className="flex flex-col md:flex-row items-center justify-between mb-4 ">
+        <h3 className="font-bold text-lg flex ">
+          Monthly Mood: &nbsp;
+          <span className="text-blue-600 hover:text-blue-500">{month}</span>
+        </h3>
+        <div className="flex items-center mt-3 md:mt-0">
           <div
             className="font-bold shadow hover:shadow-md cursor-pointer transform duration-150 h-8 w-8 flex items-center justify-center rounded-full"
             onClick={() => setOffset((prev) => prev - 1)}

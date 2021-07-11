@@ -7,6 +7,8 @@ import { Skeleton } from "antd";
 import { CaretLeftOutlined, CaretRightOutlined } from "@ant-design/icons";
 
 import { UserContext } from "../../context/UserContext";
+import { db } from "../../utils/firebase";
+import { User } from "../../types";
 
 interface Data {
   labels: string[];
@@ -15,10 +17,11 @@ interface Data {
 
 const WeeklyGraph = () => {
   const [data, setData] = useState<Data | null>(null);
+  const [week, setWeek] = useState<string>("");
   const [xLabels, setXLabels] = useState<string[]>([]);
   const [yLabels] = useState<string[]>(["", "🙁", "😐", "🙂", "😄", "🤗"]);
   const [offset, setOffset] = useState<number>(0);
-  const { user } = useContext(UserContext);
+  const { user, setUser } = useContext(UserContext);
 
   const options: ChartOptions = {
     plugins: {
@@ -54,12 +57,8 @@ const WeeklyGraph = () => {
   };
 
   useEffect(() => {
-    if (user !== null) getDates(0);
-  }, [user]);
-
-  useEffect(() => {
     if (user !== null) getDates(offset);
-  }, [offset]);
+  }, [user, offset]);
 
   const getDates = (weekOffsets: number = 0) => {
     let tempDays = [];
@@ -77,18 +76,38 @@ const WeeklyGraph = () => {
       tempDays.push(date.dayOfYear());
       tempDates.push(date.format("DD/MM/YYYY"));
     }
+    setWeek(
+      `${tempDates[0].slice(0, 5)} - ${tempDates[tempDates.length - 1].slice(
+        0,
+        5
+      )}`
+    );
+    const year = moment(tempDates[0], "DD/MM/YYYY").year();
     setXLabels(tempDates);
-    getData(tempDays, tempDates);
+    getData(tempDays, tempDates, year);
   };
 
-  const getData = (dates: number[], tempDates: string[]) => {
+  const getData = async (
+    dates: number[],
+    tempDates: string[],
+    year: number
+  ) => {
     const tempData = [];
-    for (let i = 0; i < dates.length; i++) {
-      if (user![moment().year()][dates[i]]) {
-        tempData.push(user![moment().year()][dates[i]].mood + 1);
-      } else {
-        tempData.push(0);
+    if (user![year]) {
+      for (let i = 0; i < dates.length; i++) {
+        if (user![year][dates[i]]) {
+          tempData.push(user![year][dates[i]].mood + 1);
+        } else {
+          tempData.push(0);
+        }
       }
+    } else {
+      await db
+        .collection("users")
+        .doc(user?.email)
+        .update({ ...user, [year]: {} });
+      setUser!({ ...user, [year]: {} } as User);
+      for (let i = 0; i < dates.length; i++) tempData.push(0);
     }
     setData({
       labels: xLabels.length > 0 ? xLabels : tempDates,
@@ -108,9 +127,14 @@ const WeeklyGraph = () => {
 
   return (
     <div className="flex flex-col flex-1 p-2 lg:p-5 bg-white rounded">
-      <div className="flex items-center mb-4 justify-between">
-        <h3 className="font-bold text-lg">Weekly Mood Graph</h3>
-        <div className="flex items-center">
+      <div className="flex flex-col md:flex-row items-center mb-4 justify-between">
+        <h3 className="font-bold text-lg">
+          Weekly Mood: &nbsp;
+          <span className="tracking-tighter text-blue-600 hover:text-blue-500">
+            {week}
+          </span>
+        </h3>
+        <div className="flex items-center mt-3 md:mt-0">
           <div
             className="font-bold shadow hover:shadow-md cursor-pointer transform duration-150 h-8 w-8 flex items-center justify-center rounded-full"
             onClick={() => setOffset((prev) => prev - 1)}

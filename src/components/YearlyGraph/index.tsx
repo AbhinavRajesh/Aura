@@ -6,6 +6,8 @@ import { CaretLeftOutlined, CaretRightOutlined } from "@ant-design/icons";
 
 import { Bar } from "react-chartjs-2";
 import { Skeleton } from "antd";
+import { db } from "../../utils/firebase";
+import { User } from "../../types";
 
 interface Data {
   labels: string[];
@@ -14,8 +16,9 @@ interface Data {
 
 const YearlyGraph = () => {
   const [data, setData] = useState<Data | null>(null);
+  const [year, setYear] = useState<string>(moment().year().toString());
   const [offset, setOffset] = useState<number>(0);
-  const { user } = useContext(UserContext);
+  const { user, setUser } = useContext(UserContext);
 
   const options: ChartOptions = {
     plugins: {
@@ -43,21 +46,17 @@ const YearlyGraph = () => {
   };
 
   useEffect(() => {
-    if (user !== null) getYears(0);
-  }, [user]);
-
-  useEffect(() => {
     if (user !== null) getYears(offset);
-  }, [offset]);
+  }, [offset, user]);
 
   const getYears = (yearOffset: number = 0) => {
     const thisYear = moment().year();
     const offsetYear = thisYear + yearOffset;
-    console.log(offsetYear);
+    setYear(offsetYear.toString());
     getData(offsetYear);
   };
 
-  const getData = (year: number) => {
+  const getData = async (year: number) => {
     const dataSets: any[] = [];
     const colors: string[] = [
       "rgba(255, 99, 132, 0.4)",
@@ -93,13 +92,13 @@ const YearlyGraph = () => {
       const tempData: number[] = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
       for (let j = 0; j < months.length; j++) {
         const startOfMonth = moment(
-          `01/${j < 10 ? "0" + (j + 1) : j + 1}/${year}`,
+          `01/${j < 9 ? "0" + (j + 1) : j + 1}/${year}`,
           "DD/MM/YYYY"
         )
           .startOf("month")
           .dayOfYear();
         const endOfMonth = moment(
-          `01/${j < 10 ? "0" + (j + 1) : j + 1}/${year}`,
+          `01/${j < 9 ? "0" + (j + 1) : j + 1}/${year}`,
           "DD/MM/YYYY"
         )
           .endOf("month")
@@ -114,6 +113,12 @@ const YearlyGraph = () => {
               tempData[j] += 1;
             }
           });
+        } else {
+          await db
+            .collection("users")
+            .doc(user?.email)
+            .update({ ...user, [year]: {} });
+          setUser!({ ...user, [year]: {} } as User);
         }
       }
       dataSets.push({
@@ -136,9 +141,12 @@ const YearlyGraph = () => {
 
   return (
     <div className="flex flex-col flex-1 py-5 px-5 bg-white rounded">
-      <div className="flex items-center mb-4 justify-between">
-        <h3 className="font-bold text-lg">Yearly Mood Graph</h3>
-        <div className="flex items-center">
+      <div className="flex flex-col md:flex-row items-center mb-4 justify-between">
+        <h3 className="font-bold text-lg">
+          Yearly Mood: &nbsp;
+          <span className="text-blue-600 hover:text-blue-500">{year}</span>
+        </h3>
+        <div className="flex items-center mt-3 md:mt-0">
           <div
             className="font-bold shadow hover:shadow-md cursor-pointer transform duration-150 h-8 w-8 flex items-center justify-center rounded-full"
             onClick={() => setOffset((prev) => prev - 1)}

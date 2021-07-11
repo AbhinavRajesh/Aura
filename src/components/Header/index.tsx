@@ -24,7 +24,7 @@ const Header = () => {
               <div className="flex items-center flex-grow flex-shrink-0 lg:flex-grow-0">
                 <div className="flex items-center justify-between w-full md:w-auto">
                   <a href="#">
-                    <span className="sr-only">Focus</span>
+                    <span className="sr-only">Aura</span>
                     <img
                       className="h-8 w-auto sm:h-10"
                       src="https://tailwindui.com/img/logos/workflow-mark-blue-600.svg"
@@ -40,7 +40,9 @@ const Header = () => {
                 </div>
               </div>
               <SignedIn>
-                <UserButton />
+                <div className="hidden md:block">
+                  <UserButton />
+                </div>
               </SignedIn>
               <SignedOut>
                 <div className="hidden md:block md:ml-10 md:pr-4 md:space-x-8">

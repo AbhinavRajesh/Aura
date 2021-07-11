@@ -21,6 +21,7 @@ interface Props {
   setModalVisibility: Dispatch<SetStateAction<boolean>>;
   isEdit: boolean;
   editNote?: string;
+  editDate?: string;
   editMood?: number;
 }
 
@@ -30,6 +31,7 @@ const EditModal = ({
   isEdit,
   editMood,
   editNote,
+  editDate,
 }: Props) => {
   const [date, setDate] = useState<moment.Moment>(moment);
   const [selected, setSelected] = useState<number>(2);
@@ -42,7 +44,9 @@ const EditModal = ({
   useEffect(() => {
     if (typeof editMood !== "undefined") setSelected(editMood);
     if (typeof editNote !== "undefined") setNote(editNote);
-  }, [editMood, editNote]);
+    if (typeof editDate !== "undefined")
+      setDate(moment(editDate, "DD/MM/YYYY"));
+  }, [editMood, editNote, editDate]);
 
   const moodIcons = [
     {
@@ -75,7 +79,7 @@ const EditModal = ({
         date: date.dayOfYear(),
         notes: note,
       };
-      const updatedUser = user as User;
+      const updatedUser = { ...user } as User;
       if (typeof updatedUser[date.year()] === "undefined") {
         updatedUser[date.year()] = { [date.dayOfYear()]: input };
       } else {
@@ -123,6 +127,7 @@ const EditModal = ({
             <div
               className="flex flex-col items-center justify-between"
               onClick={() => setSelected(i)}
+              key={i}
             >
               <span className={`${selected === i ? "text-2xl" : "text-base"}`}>
                 {icon.icon}
@@ -143,7 +148,9 @@ const EditModal = ({
           onChange={(e) => setNote(e.target.value)}
         />
         <button
-          className="px-4 py-2 bg-blue-600 text-white hover:bg-blue-500 rounded mt-4"
+          className={`px-4 py-2 bg-blue-600 text-white hover:bg-blue-500 rounded mt-4 ${
+            loading && "cursor-not-allowed opacity-50"
+          }`}
           onClick={() => addMood()}
         >
           {loading && <LoadingOutlined />} {isEdit ? "Edit" : "Add"} Mood

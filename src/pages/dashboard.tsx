@@ -9,7 +9,7 @@ const Dashboard = () => {
       <Header />
       <main
         id="dashboard"
-        className="mt-10 mx-2 lg:mx-auto max-w-7xl px-4 sm:mt-12 sm:px-6 md:mt-16 lg:mt-20 lg:px-8 xl:mt-28 min-h-85 flex flex-col"
+        className="mt-10 mx-2 lg:mx-auto max-w-7xl px-4 sm:mt-12 sm:px-6 lg:px-8 min-h-85 flex flex-col"
       >
         <AddToCalendar />
         <Stats />

@@ -1,14 +1,17 @@
 import { useContext, useState, useEffect } from "react";
-import { Select, Tooltip, Modal } from "antd";
+import { Select, Modal, Skeleton } from "antd";
 import moment from "moment";
 
 import AddEditModal from "../AddEditModal";
 import { UserContext } from "../../context/UserContext";
 
-import { Calendar as CalendarInterface, Mood } from "../../types";
+import { Calendar as CalendarInterface, Mood, User } from "../../types";
 import WeeklyGraph from "../WeeklyGraph";
 import MonthlyGraph from "../MonthlyGraph";
 import YearlyGraph from "../YearlyGraph";
+import YearlyPixels from "../YearlyPixels";
+import MonthlyPixles from "../MonthlyPixels";
+import { db } from "../../utils/firebase";
 
 const { Option } = Select;
 
@@ -21,7 +24,7 @@ interface ModalData {
 }
 
 const Calendar = () => {
-  const { user } = useContext(UserContext);
+  const { user, setUser } = useContext(UserContext);
   const [daysOfYear] = useState<number>(
     moment().year() % 400 ? (moment().year() % 100 ? 365 : 366) : 365
   );
@@ -30,11 +33,12 @@ const Calendar = () => {
   const [editModalVisibility, setEditModalVisibility] =
     useState<boolean>(false);
   const [modalData, setModalData] = useState<ModalData | null>(null);
+  const [yearlyOrMonthly, setYearlyOrMonthly] = useState<string>("year");
 
   useEffect(() => {
     if (user !== null) generateCalendar(user![moment().year()]);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [user]);
+  }, [user, yearlyOrMonthly]);
 
   const getColor = (moodNumber: number): string => {
     if (moodNumber === -1) return "white";
@@ -92,7 +96,6 @@ const Calendar = () => {
     moodInAYear: Record<Mood["date"], Mood> | undefined
   ) => {
     const yearCalendar: CalendarInterface[] = [];
-    console.log(moodInAYear);
     if (
       typeof moodInAYear === "undefined" ||
       Object.keys(moodInAYear).length === 0
@@ -100,13 +103,12 @@ const Calendar = () => {
       for (let i = 1; i <= daysOfYear; i++) {
         yearCalendar.push({
           notes: "",
-          color: "white",
+          color: yearlyOrMonthly === "year" ? "white" : "rgb(249, 250, 251)",
         });
       }
     } else {
       for (let i = 1; i <= daysOfYear; i++) {
         if (typeof moodInAYear[i] !== "undefined") {
-          console.log(moodInAYear[i], i);
           yearCalendar.push({
             notes: moodInAYear[i].notes,
             color: getColor(moodInAYear[i].mood),
@@ -114,7 +116,7 @@ const Calendar = () => {
         } else {
           yearCalendar.push({
             notes: "",
-            color: "white",
+            color: yearlyOrMonthly === "year" ? "white" : "rgb(249, 250, 251)",
           });
         }
       }
@@ -122,15 +124,25 @@ const Calendar = () => {
     setCalendar(yearCalendar);
   };
 
-  const getModalData = (dayOfYear: number) => {
-    const date = moment("31/12/2020", "DD/MM/YYYY")
+  const getModalData = async (
+    dayOfYear: number,
+    year: number = moment().year()
+  ) => {
+    const date = moment(`31/12/${year - 1}`, "DD/MM/YYYY")
       .add(dayOfYear, "days")
       .format("DD/MM/YYYY");
-    const mood = getEmoji(user![moment().year()][dayOfYear]?.mood);
-    if (typeof user![moment().year()][dayOfYear] !== "undefined") {
+    if (typeof user![year] === "undefined") {
+      await db
+        .collection("users")
+        .doc(user?.email)
+        .update({ ...user, [year]: {} });
+      setUser!({ ...user, [year]: {} } as User);
+    }
+    const mood = getEmoji(user![year][dayOfYear]?.mood);
+    if (typeof user![year][dayOfYear] !== "undefined") {
       setModalData({
         date: date,
-        notes: user![moment().year()][dayOfYear].notes,
+        notes: user![year][dayOfYear].notes,
         mood: mood.emoji,
         moodText: mood.moodText,
         moodNumber: mood.mood,
@@ -150,32 +162,35 @@ const Calendar = () => {
   return (
     <>
       <section className="flex flex-col">
-        <div className="flex justify-between items-center">
+        <div className="flex justify-between items-center mt-2">
           <h2 className="font-bold text-2xl my-4">Stats</h2>
-          <Select defaultValue="year">
+          <Select
+            defaultValue="year"
+            size="large"
+            onChange={(val) => setYearlyOrMonthly(val)}
+          >
             <Option value="year">Year</Option>
             <Option value="month">Month</Option>
           </Select>
         </div>
-        <div className="flex md:flex-col flex-wrap md:max-h-56 lg:max-h-44 xl:max-h-32">
-          {calendar === null
-            ? "Loading..."
-            : calendar.map((day, i) => (
-                <Tooltip
-                  title={moment("31/12/2020", "DD/MM/YYYY")
-                    .add(i + 1, "days")
-                    .format("DD/MM/YYYY")}
-                  // title={i}
-                  placement="bottom"
-                  key={i}
-                >
-                  <span
-                    style={{ backgroundColor: day.color }}
-                    className="m-0.5 h-6 w-6 md:h-4 md:w-4"
-                    onClick={() => getModalData(i + 1)}
-                  ></span>
-                </Tooltip>
-              ))}
+        <div
+          className={`flex md:flex-col flex-wrap ${
+            calendar === null && "mb-6"
+          } ${
+            yearlyOrMonthly === "year" && "md:max-h-56 lg:max-h-44 xl:max-h-32"
+          }`}
+        >
+          {calendar === null ? (
+            <Skeleton active className="bg-white p-4 rounded" />
+          ) : yearlyOrMonthly === "year" ? (
+            <YearlyPixels calendar={calendar} getModalData={getModalData} />
+          ) : (
+            <MonthlyPixles
+              calendar={calendar}
+              getModalData={getModalData}
+              getColor={getColor}
+            />
+          )}
         </div>
         <div className="flex flex-col lg:flex-row mt-8 space-y-5 lg:space-y-0 lg:space-x-5">
           <WeeklyGraph />
@@ -191,6 +206,7 @@ const Calendar = () => {
         isEdit={true}
         editMood={modalData?.moodNumber}
         editNote={modalData?.notes}
+        editDate={modalData?.date}
       />
       <Modal
         visible={modalVisibility}
@@ -198,7 +214,6 @@ const Calendar = () => {
         title={modalData?.date}
         footer={false}
         centered
-        zIndex={10000}
       >
         {modalData === null ? (
           "Loading..."
@@ -211,12 +226,17 @@ const Calendar = () => {
             {modalData.notes.length > 0 && (
               <div className="flex flex-col items-center">
                 <span className="font-normal text-base">because</span>
-                <span className="font-semibold text-lg">{modalData.notes}</span>
+                <span className="font-semibold text-lg text-center">
+                  {modalData.notes}
+                </span>
               </div>
             )}
             <button
               className="px-4 py-2 mt-4 bg-blue-600 hover:bg-blue-500 rounded text-white"
-              onClick={() => setEditModalVisibility(true)}
+              onClick={() => {
+                setEditModalVisibility(true);
+                setModalVisibility(false);
+              }}
             >
               Edit Details
             </button>
