@@ -5,6 +5,7 @@ import "./App.scss";
 import { SignedIn, SignedOut, ClerkProvider } from "@clerk/clerk-react";
 import Dashboard from "./pages/dashboard";
 import UserProvider from "./context/UserContext";
+import Aura from "./pages/aura";
 
 const App: React.FC = () => {
   return (
@@ -17,6 +18,7 @@ const App: React.FC = () => {
           <SignedIn>
             <UserProvider>
               <Route exact path="/" component={Dashboard} />
+              <Route exact path="/aura" component={Aura} />
             </UserProvider>
           </SignedIn>
         </ClerkProviderWithNavigate>

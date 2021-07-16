@@ -160,7 +160,7 @@ const MonthlyPixles = ({ calendar, getModalData, getColor }: Props) => {
           monthlyCalendar.map((day, i) => (
             <span
               style={{ backgroundColor: day.color, aspectRatio: "1/1" }}
-              className="tracking-tighter pr-1 md:pr-3 h-full w-full md:h-12 md:w-12 flex items-end justify-end font-bold"
+              className="tracking-tighter pr-1 md:pr-3 h-full w-full md:h-12 md:w-12 flex items-end justify-end font-bold cursor-pointer"
               onClick={() => getModalData(maxAndMinDates.min + i, year)}
               key={i}
             >

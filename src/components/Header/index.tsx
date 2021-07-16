@@ -3,6 +3,9 @@ import { Popover, Transition } from "@headlessui/react";
 
 import { MenuIcon, XIcon } from "@heroicons/react/outline";
 import { SignedIn, SignedOut, useClerk, UserButton } from "@clerk/clerk-react";
+import { Link } from "react-router-dom";
+
+import logo from "../../logo.svg";
 
 const navigation = [
   { name: "Home", href: "#home" },
@@ -25,11 +28,7 @@ const Header = () => {
                 <div className="flex items-center justify-between w-full md:w-auto">
                   <a href="#">
                     <span className="sr-only">Aura</span>
-                    <img
-                      className="h-8 w-auto sm:h-10"
-                      src="https://tailwindui.com/img/logos/workflow-mark-blue-600.svg"
-                      alt="Logo"
-                    />
+                    <img className="h-8 w-auto sm:h-10" src={logo} alt="Aura" />
                   </a>
                   <div className="-mr-2 flex items-center md:hidden">
                     <Popover.Button className="bg-gray-50 rounded-md p-2 inline-flex items-center justify-center text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500">
@@ -40,8 +39,16 @@ const Header = () => {
                 </div>
               </div>
               <SignedIn>
-                <div className="hidden md:block">
-                  <UserButton />
+                <div className="hidden md:flex items-center md:ml-10 md:pr-4 md:space-x-8">
+                  <Link
+                    to="/aura"
+                    className="font-medium text-gray-500 hover:text-gray-900"
+                  >
+                    Aura
+                  </Link>
+                  <div className="hidden md:block">
+                    <UserButton />
+                  </div>
                 </div>
               </SignedIn>
               <SignedOut>
@@ -84,11 +91,7 @@ const Header = () => {
               <div className="rounded-lg shadow-md bg-white ring-1 ring-black ring-opacity-5 overflow-hidden">
                 <div className="px-5 pt-4 flex items-center justify-between">
                   <div>
-                    <img
-                      className="h-8 w-auto"
-                      src="https://tailwindui.com/img/logos/workflow-mark-indigo-600.svg"
-                      alt=""
-                    />
+                    <img className="h-8 w-auto" src={logo} alt="Aura" />
                   </div>
                   <div className="-mr-2">
                     <Popover.Button className="bg-white rounded-md p-2 inline-flex items-center justify-center text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-blue-500">
@@ -117,7 +120,15 @@ const Header = () => {
                   </span>
                 </SignedOut>
                 <SignedIn>
-                  <UserButton />
+                  <div className="flex flex-col md:ml-10 md:pr-4 md:space-x-8 p-4">
+                    <Link
+                      to="/aura"
+                      className="font-medium text-gray-500 hover:text-gray-900 mb-4"
+                    >
+                      Aura
+                    </Link>
+                    <UserButton />
+                  </div>
                 </SignedIn>
               </div>
             </Popover.Panel>
