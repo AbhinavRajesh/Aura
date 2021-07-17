@@ -44,6 +44,7 @@ const MonthlyGraph = () => {
 
   useEffect(() => {
     if (user !== null) getMonths(offset);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [user, offset]);
 
   const getMonths = (monthOffset: number = 0) => {
@@ -62,8 +63,8 @@ const MonthlyGraph = () => {
     year: number
   ) => {
     const tempData: number[] = [0, 0, 0, 0, 0];
-    // eslint-disable-next-line array-callback-return
     if (user![year]) {
+      // eslint-disable-next-line array-callback-return
       Object.values(user![year]).map((value: any) => {
         if (value.date >= startOfMonth && value.date <= endOfMonth) {
           tempData[value.mood] += 1;

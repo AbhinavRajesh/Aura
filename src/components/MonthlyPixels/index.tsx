@@ -37,6 +37,7 @@ const MonthlyPixles = ({ calendar, getModalData, getColor }: Props) => {
 
   useEffect(() => {
     getCalendar(offset);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [calendar, offset]);
 
   const getCalendar = async (monthOffset: number) => {

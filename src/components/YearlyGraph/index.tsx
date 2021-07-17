@@ -47,6 +47,7 @@ const YearlyGraph = () => {
 
   useEffect(() => {
     if (user !== null) getYears(offset);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [offset, user]);
 
   const getYears = (yearOffset: number = 0) => {
@@ -104,6 +105,7 @@ const YearlyGraph = () => {
           .endOf("month")
           .dayOfYear();
         if (user![year]) {
+          // eslint-disable-next-line array-callback-return
           Object.values(user![year]).map((value: any) => {
             if (
               value.date >= startOfMonth &&

@@ -58,6 +58,7 @@ const WeeklyGraph = () => {
 
   useEffect(() => {
     if (user !== null) getDates(offset);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [user, offset]);
 
   const getDates = (weekOffsets: number = 0) => {
