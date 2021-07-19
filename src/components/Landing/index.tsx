@@ -1,4 +1,9 @@
+/* eslint-disable jsx-a11y/anchor-is-valid */
+import { useClerk } from "@clerk/clerk-react";
+
 const Landing = () => {
+  const { openSignUp } = useClerk();
+
   return (
     <main
       id="home"
@@ -24,8 +29,9 @@ const Landing = () => {
             Features
           </a>
           <a
-            href="#signup"
+            href="#"
             className="ml-4 px-4 py-2 border-blue-600 border hover:border-blue-500 text-blue-600 hover:text-blue-500 rounded text-xl"
+            onClick={() => openSignUp()}
           >
             Sign Up
           </a>

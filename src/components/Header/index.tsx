@@ -27,10 +27,10 @@ const Header = () => {
             >
               <div className="flex items-center flex-grow flex-shrink-0 lg:flex-grow-0">
                 <div className="flex items-center justify-between w-full md:w-auto">
-                  <a href="#">
+                  <Link to="/">
                     <span className="sr-only">Aura</span>
                     <img className="h-8 w-auto sm:h-10" src={logo} alt="Aura" />
-                  </a>
+                  </Link>
                   <div className="-mr-2 flex items-center md:hidden">
                     <Popover.Button className="bg-gray-50 rounded-md p-2 inline-flex items-center justify-center text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500">
                       <span className="sr-only">Open main menu</span>

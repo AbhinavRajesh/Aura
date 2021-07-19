@@ -10,13 +10,13 @@ interface LayoutProps {
 
 const Layout: React.FC<LayoutProps> = (props: LayoutProps) => {
   return (
-    <div className="container">
+    <>
       <Header />
-      <div className="mt-10 mx-auto max-w-7xl px-4 sm:mt-12 sm:px-6 md:mt-16 lg:mt-20 lg:px-8 xl:mt-28 min-h-85 flex justify-center items-center">
+      <main className="mt-24 mx-2 lg:mx-auto max-w-7xl px-4 sm:mt-20 sm:px-6 lg:px-8 min-h-85 flex flex-col">
         {props.children}
-      </div>
+      </main>
       <Footer />
-    </div>
+    </>
   );
 };
 
