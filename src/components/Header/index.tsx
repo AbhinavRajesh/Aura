@@ -42,6 +42,12 @@ const Header = () => {
               <SignedIn>
                 <div className="hidden md:flex items-center md:ml-10 md:pr-4 md:space-x-8">
                   <Link
+                    to="/"
+                    className="font-medium text-gray-500 hover:text-gray-900"
+                  >
+                    Home
+                  </Link>
+                  <Link
                     to="/aura"
                     className="font-medium text-gray-500 hover:text-gray-900"
                   >
@@ -122,6 +128,12 @@ const Header = () => {
                 </SignedOut>
                 <SignedIn>
                   <div className="flex flex-col md:ml-10 md:pr-4 md:space-x-8 p-4">
+                    <Link
+                      to="/"
+                      className="font-medium text-gray-500 hover:text-gray-900 mb-4"
+                    >
+                      Home
+                    </Link>
                     <Link
                       to="/aura"
                       className="font-medium text-gray-500 hover:text-gray-900 mb-4"

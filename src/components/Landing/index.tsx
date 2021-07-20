@@ -10,16 +10,13 @@ const Landing = () => {
       className="mt-10 mx-auto max-w-7xl px-4 sm:mt-12 sm:px-6 md:mt-16 lg:mt-20 lg:px-8 xl:mt-28 min-h-85 flex justify-start items-center"
     >
       <div className="text-left w-full">
-        <h1 className="text-4xl tracking-tight font-extrabold text-gray-900 sm:text-5xl lg:text-7xl max-w-3xl">
-          <span className="block md:inline">Your </span>{" "}
-          <span className="block text-blue-600 md:inline">mood</span>{" "}
-          <span className="block md:inline">
-            {" "}
-            is the most important thing in your life.
-          </span>
+        <h1 className="text-3xl tracking-tight font-extrabold text-gray-900 sm:text-5xl lg:text-7xl max-w-3xl">
+          <span className="md:inline">Your</span>{" "}
+          <span className="text-blue-600 md:inline">mood</span>{" "}
+          <span className="md:inline">changes throughout the days.</span>{" "}
         </h1>
-        <p className="mt-3 text-base text-gray-500 sm:mt-5 sm:text-lg sm:max-w-xl md:mt-5 md:text-xl">
-          Keep track of your mood and improve the quality of your life
+        <p className="mt-3 font-bold text-base text-gray-500 sm:mt-5 sm:text-lg sm:max-w-xl md:mt-5 md:text-xl">
+          But what if you could see it?
         </p>
         <div className="mt-5 sm:mt-8 sm:flex sm:justify-start mx-auto w-full">
           <a

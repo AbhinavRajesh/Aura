@@ -18,6 +18,7 @@ const YearlyPixels = ({ calendar, getModalData }: Props) => {
           // title={i}
           placement="bottom"
           key={i}
+          className="cursor-pointer"
         >
           <span
             style={{ backgroundColor: day.color }}
