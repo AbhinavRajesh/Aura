@@ -13,6 +13,7 @@ import { LoadingOutlined } from "@ant-design/icons";
 import { UserContext } from "../../context/UserContext";
 import { User } from "../../types";
 import { db } from "../../utils/firebase";
+import Recommend from "../Recommend";
 
 const { TextArea } = Input;
 
@@ -37,6 +38,8 @@ const EditModal = ({
   const [selected, setSelected] = useState<number>(2);
   const [note, setNote] = useState<string>("");
   const [loading, setLoading] = useState<boolean>(false);
+  const [displayRecommendation, setDisplayRecommendation] =
+    useState<boolean>(false);
 
   const { emailAddresses } = useUser();
   const { user, setUser } = useContext(UserContext);
@@ -94,6 +97,12 @@ const EditModal = ({
         .update(updatedUser);
       setUser!(updatedUser);
       message.success("Mood added succesfully! Carry on with your day :)");
+      if (
+        moment().format("DD/MM/YYYY") === date.format("DD/MM/YYYY") &&
+        selected < 2
+      ) {
+        setDisplayRecommendation(true);
+      }
       setModalVisibility(false);
     } catch (err) {
       console.error(err);
@@ -103,60 +112,67 @@ const EditModal = ({
   };
 
   return (
-    <Modal
-      visible={modalVisibility}
-      onCancel={() => setModalVisibility(false)}
-      footer={false}
-      title={[<span>{isEdit ? "Edit Mood" : "Add Mood to calendar"}</span>]}
-      centered
-    >
-      <div className="flex flex-col">
-        {!isEdit && (
-          <>
-            <p className="font-semibold my-2 text-base">Select Date</p>
-            <DatePicker
-              defaultValue={moment()}
-              format="DD/MM/YYYY"
-              onChange={(val) => setDate(val as moment.Moment)}
-            />
-          </>
-        )}
-        <p className="font-semibold my-2 text-base">How was your day?</p>
-        <div className="grid grid-cols-5">
-          {moodIcons.map((icon, i) => (
-            <div
-              className="flex flex-col items-center justify-between"
-              onClick={() => setSelected(i)}
-              key={i}
-            >
-              <span className={`${selected === i ? "text-2xl" : "text-base"}`}>
-                {icon.icon}
-              </span>
-              <span className={`${selected === i && "font-bold"}`}>
-                {icon.text}
-              </span>
-            </div>
-          ))}
+    <>
+      <Modal
+        visible={modalVisibility}
+        onCancel={() => setModalVisibility(false)}
+        footer={false}
+        title={[<span>{isEdit ? "Edit Mood" : "Add Mood to calendar"}</span>]}
+        centered
+      >
+        <div className="flex flex-col">
+          {!isEdit && (
+            <>
+              <p className="font-semibold my-2 text-base">Select Date</p>
+              <DatePicker
+                defaultValue={moment()}
+                format="DD/MM/YYYY"
+                onChange={(val) => setDate(val as moment.Moment)}
+              />
+            </>
+          )}
+          <p className="font-semibold my-2 text-base">How was your day?</p>
+          <div className="grid grid-cols-5">
+            {moodIcons.map((icon, i) => (
+              <div
+                className="flex flex-col items-center justify-between"
+                onClick={() => setSelected(i)}
+                key={i}
+              >
+                <span
+                  className={`${selected === i ? "text-2xl" : "text-base"}`}
+                >
+                  {icon.icon}
+                </span>
+                <span className={`${selected === i && "font-bold"}`}>
+                  {icon.text}
+                </span>
+              </div>
+            ))}
+          </div>
+          <p className="font-semibold my-2 text-base">Note:</p>
+          <TextArea
+            autoSize={{ minRows: 3, maxRows: 5 }}
+            placeholder={`Maybe add why your day was ${
+              selected < 2 ? "bad" : "good"
+            }`}
+            value={note}
+            onChange={(e) => setNote(e.target.value)}
+          />
+          <button
+            className={`px-4 py-2 bg-blue-600 text-white hover:bg-blue-500 rounded mt-4 ${
+              loading && "cursor-not-allowed opacity-50"
+            }`}
+            onClick={() => addMood()}
+          >
+            {loading && <LoadingOutlined />} {isEdit ? "Edit" : "Add"} Mood
+          </button>
         </div>
-        <p className="font-semibold my-2 text-base">Note:</p>
-        <TextArea
-          autoSize={{ minRows: 3, maxRows: 5 }}
-          placeholder={`Maybe add why your day was ${
-            selected < 2 ? "bad" : "good"
-          }`}
-          value={note}
-          onChange={(e) => setNote(e.target.value)}
-        />
-        <button
-          className={`px-4 py-2 bg-blue-600 text-white hover:bg-blue-500 rounded mt-4 ${
-            loading && "cursor-not-allowed opacity-50"
-          }`}
-          onClick={() => addMood()}
-        >
-          {loading && <LoadingOutlined />} {isEdit ? "Edit" : "Add"} Mood
-        </button>
-      </div>
-    </Modal>
+      </Modal>
+      {displayRecommendation && (
+        <Recommend setDisplayRecommendation={setDisplayRecommendation} />
+      )}
+    </>
   );
 };
 
