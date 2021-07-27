@@ -40,3 +40,7 @@
 .min-h-85 {
   min-height: 85vh;
 }
+
+.ant-message-custom-content {
+  @apply flex items-center;
+}

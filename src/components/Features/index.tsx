@@ -2,6 +2,7 @@ import AddToCalendar from "../../assets/AddToCalendar.gif";
 import MoodHistory from "../../assets/MoodHistory.png";
 import MoodGraph from "../../assets/MoodGraph.png";
 import Aura from "../../assets/Aura.png";
+import PWA from "../../assets/PWA.png";
 
 const Features = () => {
   return (
@@ -45,12 +46,15 @@ const Features = () => {
               </div>
               <img
                 src={MoodHistory}
-                alt="GIF on how to add to calendar"
+                alt="Mood history in monthly/yearly view"
                 className="row-start-1 row-end-1 md:row-start-auto md:row-end-auto"
               />
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
-              <img src={MoodGraph} alt="GIF on how to add to calendar" />
+              <img
+                src={MoodGraph}
+                alt="Analyse your mood in beautiful graphs"
+              />
               <div className="flex flex-col">
                 <h2 className="text-2xl text-center md:text-left md:text-4xl font-bold">
                   Analyse your mood
@@ -72,9 +76,24 @@ const Features = () => {
               </div>
               <img
                 src={Aura}
-                alt="GIF on how to add to calendar"
+                alt="20+ Ambient Sounds to enhance your day"
                 className="row-start-1 row-end-1 md:row-start-auto md:row-end-auto"
               />
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
+              <img
+                src={PWA}
+                alt="Install this app on your phone/desktop and use it as a native"
+              />
+              <div className="flex flex-col">
+                <h2 className="text-2xl text-center md:text-left md:text-4xl font-bold">
+                  It's a Progressive Web App!
+                </h2>
+                <p className="text-lg text-center md:text-left md:text-2xl mt-4">
+                  It's a PWA, it means that you can install the web app into you
+                  phone/tab/desktop and use it as a native app!
+                </p>
+              </div>
             </div>
           </div>
           {/*  row-start-1 row-end-1 */}
