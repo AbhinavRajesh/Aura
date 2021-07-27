@@ -7,7 +7,7 @@
 <h4 align="center">Your mood changes throughout the days. <br /><i>But what if you could see it?</i></h4>
 
 <p align="center">
-<a href="https://github.com/AbhinavRajesh/Aura/blob/main/LICENSE.md" target="blank">
+<a href="https://github.com/AbhinavRajesh/Aura/blob/main/LICENSE" target="blank">
 <img src="https://img.shields.io/github/license/abhinavrajesh/aura?style=flat-square" alt="Aura License" />
 </a>
 <a href="https://github.com/abhinavrajesh/aura/stargazers" target="blank">
