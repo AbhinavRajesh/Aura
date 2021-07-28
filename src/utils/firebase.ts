@@ -11,6 +11,7 @@ if (!firebase.apps.length) {
     storageBucket: "focus-26a80.appspot.com",
     messagingSenderId: "243269461163",
     appId: "1:243269461163:web:0aaeea7bdbabba56fc83ee",
+    measurementId: "G-715TT0HGV0",
   });
   firebase.analytics();
 }
