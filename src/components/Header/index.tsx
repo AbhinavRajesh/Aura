@@ -21,13 +21,15 @@ const Header = () => {
       {({ open }) => (
         <>
           <div className="fixed top-0 left-0 w-full">
-            {process.env.REACT_APP_AUTH_CHANGE === "true" && (
+            {true && (
               <SignedOut>
-                <div className="bg-blue-500 text-xs md:text-sm px-4 flex items-center justify-center py-4 text-white font-bold">
+                <div className="bg-blue-500 text-xs md:text-sm px-4 flex items-center text-center justify-center py-4 text-white font-bold">
                   There was a minor change in authentication system. So if you
                   find that your account is invalid/missing during signin,
                   please signup again with the same email address. The old data
-                  would still be present.
+                  would still be present. <br /> (P.S. Incase it starts acting
+                  weird please clear the cookies by click the lock icon in
+                  address bar. Sorry for the inconvenience)
                 </div>
               </SignedOut>
             )}

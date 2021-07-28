@@ -1,7 +1,7 @@
 import firebase from "firebase/app";
 import "firebase/firestore";
 import "firebase/auth";
-// import "firebase/analytics";
+import "firebase/analytics";
 
 if (!firebase.apps.length) {
   firebase.initializeApp({
@@ -12,7 +12,7 @@ if (!firebase.apps.length) {
     messagingSenderId: "243269461163",
     appId: "1:243269461163:web:0aaeea7bdbabba56fc83ee",
   });
-  //   firebase.analytics();
+  firebase.analytics();
 }
 
 export const db = firebase.firestore();
