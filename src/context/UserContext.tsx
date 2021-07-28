@@ -1,7 +1,7 @@
 import { useUser } from "@clerk/clerk-react";
 import { useState, createContext, Dispatch, SetStateAction } from "react";
 import { User } from "../types";
-import { db } from "../utils/firebase";
+import firebase, { db } from "../utils/firebase";
 
 interface ContextProps {
   user: User | null;
@@ -16,10 +16,13 @@ export const UserContext = createContext<ContextProps>({
 const UserProvider = (props: any) => {
   const [user, setUser] = useState<User | null>(null);
 
-  const { emailAddresses } = useUser();
+  const clerkUser = useUser();
 
-  const getUser = () => {
-    const email: string = emailAddresses[0].emailAddress;
+  const getUser = async () => {
+    const email: string = clerkUser.emailAddresses[0].emailAddress;
+    const customToken = await clerkUser.getToken("firebase");
+    await firebase.auth().signInWithCustomToken(customToken as any);
+
     if (email) {
       db.collection("users")
         .doc(email)
@@ -30,9 +33,7 @@ const UserProvider = (props: any) => {
               .doc(email)
               .set({
                 email: email,
-                mood: {
-                  [new Date().getFullYear()]: {},
-                },
+                [new Date().getFullYear()]: {},
               });
             setUser({
               email: email,

@@ -1,5 +1,11 @@
 import React from "react";
-import { BrowserRouter, Route, Switch, useHistory } from "react-router-dom";
+import {
+  BrowserRouter,
+  Redirect,
+  Route,
+  Switch,
+  useHistory,
+} from "react-router-dom";
 import Home from "./pages/index";
 import "./App.scss";
 import { SignedIn, SignedOut, ClerkProvider } from "@clerk/clerk-react";
@@ -21,6 +27,7 @@ const App: React.FC = () => {
               <Route exact path="/aura" component={Aura} />
             </UserProvider>
           </SignedIn>
+          <Route render={() => <Redirect to="/" />} />
         </ClerkProviderWithNavigate>
       </Switch>
     </BrowserRouter>
@@ -31,7 +38,7 @@ const ClerkProviderWithNavigate = ({ children }: { children: any }) => {
   const { push } = useHistory();
   return (
     <ClerkProvider
-      frontendApi="clerk.d3lk2.twegb.lcl.dev"
+      frontendApi={process.env.REACT_APP_CLERK_FRONTEND_API}
       navigate={(to) => {
         return push(to);
       }}

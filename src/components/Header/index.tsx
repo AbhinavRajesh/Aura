@@ -20,9 +20,19 @@ const Header = () => {
     <Popover>
       {({ open }) => (
         <>
-          <div className=" pt-6 px-4 sm:px-6 lg:px-8 fixed top-0 left-0 w-full">
+          <div className="fixed top-0 left-0 w-full">
+            {process.env.REACT_APP_AUTH_CHANGE === "true" && (
+              <SignedOut>
+                <div className="bg-blue-500 text-xs md:text-sm px-4 flex items-center justify-center py-4 text-white font-bold">
+                  There was a minor change in authentication system. So if you
+                  find that your account is invalid/missing during signin,
+                  please signup again with the same email address. The old data
+                  would still be present.
+                </div>
+              </SignedOut>
+            )}
             <nav
-              className="relative flex items-center justify-between sm:h-10"
+              className="pt-6 px-4 sm:px-6 lg:px-8 relative flex items-center justify-between sm:h-10"
               aria-label="Global"
             >
               <div className="flex items-center flex-grow flex-shrink-0 lg:flex-grow-0">
