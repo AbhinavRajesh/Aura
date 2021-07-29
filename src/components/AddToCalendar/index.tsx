@@ -1,20 +1,11 @@
-import { useContext, useEffect, useState } from "react";
+import { useState } from "react";
 import { useUser } from "@clerk/clerk-react";
-import { UserContext } from "../../context/UserContext";
 
 import AddEditModal from "../AddEditModal";
 
 const AddToCalendar = () => {
   const { firstName } = useUser();
   const [modalVisibility, setModalVisibility] = useState<boolean>(false);
-
-  const { user, getUser } = useContext(UserContext);
-
-  useEffect(() => {
-    if (user === null) {
-      getUser!();
-    }
-  }, [getUser, user]);
 
   return (
     <>

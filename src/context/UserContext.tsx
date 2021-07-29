@@ -1,5 +1,11 @@
 import { useUser } from "@clerk/clerk-react";
-import { useState, createContext, Dispatch, SetStateAction } from "react";
+import {
+  useState,
+  createContext,
+  Dispatch,
+  SetStateAction,
+  useEffect,
+} from "react";
 import { User } from "../types";
 import firebase, { db } from "../utils/firebase";
 
@@ -47,6 +53,13 @@ const UserProvider = (props: any) => {
       setUser(null);
     }
   };
+
+  useEffect(() => {
+    if (user === null) {
+      getUser!();
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [user]);
 
   return (
     <UserContext.Provider value={{ user, getUser, setUser }}>
