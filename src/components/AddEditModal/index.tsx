@@ -135,7 +135,7 @@ const EditModal = ({
           <div className="grid grid-cols-5">
             {moodIcons.map((icon, i) => (
               <div
-                className="flex flex-col items-center justify-between"
+                className="flex flex-col items-center justify-between cursor-pointer"
                 onClick={() => setSelected(i)}
                 key={i}
               >
