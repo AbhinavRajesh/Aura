@@ -12,6 +12,7 @@ import YearlyGraph from "../YearlyGraph";
 import YearlyPixels from "../YearlyPixels";
 import MonthlyPixles from "../MonthlyPixels";
 import { db } from "../../utils/firebase";
+import { getEmoji } from "../../utils/helper";
 
 const { Option } = Select;
 
@@ -50,46 +51,6 @@ const Calendar = () => {
       "rgb(54, 162, 235)",
     ];
     return colors[moodNumber];
-  };
-
-  const getEmoji = (
-    mood?: number
-  ): { emoji: string; moodText: string; mood: number } => {
-    if (typeof mood === "undefined") mood = -1;
-    switch (mood) {
-      case 0:
-        return {
-          emoji: "🙁",
-          moodText: "You said you had a rough day",
-          mood: 0,
-        };
-      case 1:
-        return {
-          emoji: "😐",
-          moodText: "You said you had an okayish day",
-          mood: 1,
-        };
-      case 2:
-        return { emoji: "🙂", moodText: "You said it was a good day", mood: 2 };
-      case 3:
-        return {
-          emoji: "😄",
-          moodText: "You said you had an awesome day",
-          mood: 3,
-        };
-      case 4:
-        return {
-          emoji: "🤗",
-          moodText: "You said you had a great day!",
-          mood: 4,
-        };
-      default:
-        return {
-          emoji: "🤔",
-          moodText: "You didn't add any data for this day :(",
-          mood: -1,
-        };
-    }
   };
 
   const generateCalendar = (
@@ -218,7 +179,7 @@ const Calendar = () => {
         {modalData === null ? (
           "Loading..."
         ) : (
-          <div className="flex flex-col items-center">
+          <div className="flex flex-col items-center overflow-hidden">
             <p className="text-3xl text-center mb-4">{modalData.mood}</p>
             <p className="text-center font-semibold text-lg">
               {modalData.moodText}
@@ -226,7 +187,7 @@ const Calendar = () => {
             {modalData.notes.length > 0 && (
               <div className="flex flex-col items-center">
                 <span className="font-normal text-base">because</span>
-                <span className="font-semibold text-lg text-center">
+                <span className="font-semibold text-lg text-center ">
                   {modalData.notes}
                 </span>
               </div>
