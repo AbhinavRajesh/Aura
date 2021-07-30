@@ -20,7 +20,7 @@ const Header = () => {
     <Popover>
       {({ open }) => (
         <>
-          <div className="fixed top-0 left-0 w-full">
+          <div className="fixed top-0 left-0 w-full z-50">
             {true && (
               <SignedOut>
                 <div className="bg-blue-500 text-xs md:text-sm px-4 flex items-center text-center justify-center py-4 text-white font-bold">
@@ -65,13 +65,33 @@ const Header = () => {
                   >
                     Aura
                   </Link>
+                  <a
+                    href="https://www.producthunt.com/posts/aura-b260f046-6bf7-439f-8cd7-8521db48ae46?utm_source=badge-featured&utm_medium=badge&utm_souce=badge-aura-b260f046-6bf7-439f-8cd7-8521db48ae46"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <img
+                      src="https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=306462&theme=dark"
+                      alt="Aura - See your mood in a whole new light | Product Hunt"
+                    />
+                  </a>
                   <div className="hidden md:block">
                     <UserButton />
                   </div>
                 </div>
               </SignedIn>
               <SignedOut>
-                <div className="hidden md:block md:ml-10 md:pr-4 md:space-x-8">
+                <div className="hidden md:flex items-center md:ml-10 md:pr-4 md:space-x-8">
+                  <a
+                    href="https://www.producthunt.com/posts/aura-b260f046-6bf7-439f-8cd7-8521db48ae46?utm_source=badge-featured&utm_medium=badge&utm_souce=badge-aura-b260f046-6bf7-439f-8cd7-8521db48ae46"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <img
+                      src="https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=306462&theme=dark"
+                      alt="Aura - See your mood in a whole new light | Product Hunt"
+                    />
+                  </a>
                   {navigation.map((item) => (
                     <a
                       key={item.name}
@@ -131,6 +151,17 @@ const Header = () => {
                       </a>
                     ))}
                   </div>
+                  <a
+                    href="https://www.producthunt.com/posts/aura-b260f046-6bf7-439f-8cd7-8521db48ae46?utm_source=badge-featured&utm_medium=badge&utm_souce=badge-aura-b260f046-6bf7-439f-8cd7-8521db48ae46"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <img
+                      src="https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=306462&theme=dark"
+                      alt="Aura - See your mood in a whole new light | Product Hunt"
+                      className="ml-4 mb-4"
+                    />
+                  </a>
                   <span
                     onClick={() => openSignIn()}
                     className="block w-full px-5 py-3 text-center font-medium text-blue-500 bg-gray-50 hover:bg-gray-100"
@@ -153,6 +184,17 @@ const Header = () => {
                       Aura
                     </Link>
                     <UserButton />
+                    <a
+                      href="https://www.producthunt.com/posts/aura-b260f046-6bf7-439f-8cd7-8521db48ae46?utm_source=badge-featured&utm_medium=badge&utm_souce=badge-aura-b260f046-6bf7-439f-8cd7-8521db48ae46"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      <img
+                        src="https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=306462&theme=dark"
+                        alt="Aura - See your mood in a whole new light | Product Hunt"
+                        className="my-4"
+                      />
+                    </a>
                   </div>
                 </SignedIn>
               </div>
