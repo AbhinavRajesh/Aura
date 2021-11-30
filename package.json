@@ -4,7 +4,7 @@
   "private": true,
   "dependencies": {
     "@clerk/clerk-react": "^2.2.1",
-    "@craco/craco": "^6.2.0",
+    "@craco/craco": "^6.4.2",
     "@headlessui/react": "^1.3.0",
     "@heroicons/react": "^1.0.5",
     "@testing-library/jest-dom": "^5.11.4",
