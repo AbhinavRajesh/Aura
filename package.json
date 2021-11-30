@@ -14,7 +14,7 @@
     "@types/node": "^12.0.0",
     "@types/react": "^17.0.0",
     "@types/react-dom": "^17.0.11",
-    "antd": "^4.16.6",
+    "antd": "^4.17.2",
     "chart.js": "^3.6.0",
     "firebase": "^9.5.0",
     "howler": "^2.2.3",
