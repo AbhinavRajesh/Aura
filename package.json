@@ -12,7 +12,7 @@
     "@testing-library/user-event": "^13.5.0",
     "@types/jest": "^27.0.3",
     "@types/node": "^12.0.0",
-    "@types/react": "^17.0.0",
+    "@types/react": "^17.0.37",
     "@types/react-dom": "^17.0.11",
     "antd": "^4.17.2",
     "chart.js": "^3.6.0",
