@@ -54,7 +54,7 @@
   },
   "devDependencies": {
     "@types/howler": "^2.2.3",
-    "@types/node-sass": "^4.11.1",
+    "@types/node-sass": "^4.11.2",
     "@types/react-router-dom": "^5.1.7",
     "autoprefixer": "9",
     "postcss": "7",
