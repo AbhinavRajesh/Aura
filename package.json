@@ -16,7 +16,7 @@
     "@types/react-dom": "^17.0.11",
     "antd": "^4.17.2",
     "chart.js": "^3.6.2",
-    "firebase": "^9.5.0",
+    "firebase": "^9.6.1",
     "howler": "^2.2.3",
     "moment": "^2.29.1",
     "node-sass": "7.0.0",
