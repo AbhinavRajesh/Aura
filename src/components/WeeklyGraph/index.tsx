@@ -1,4 +1,4 @@
-import { ChartOptions } from "chart.js";
+import "chart.js/auto";
 import { useContext, useEffect, useState } from "react";
 import moment from "moment";
 
@@ -23,7 +23,7 @@ const WeeklyGraph = () => {
   const [offset, setOffset] = useState<number>(0);
   const { user, setUser } = useContext(UserContext);
 
-  const options: ChartOptions = {
+  const options: any = {
     plugins: {
       legend: {
         display: false,
@@ -32,7 +32,7 @@ const WeeklyGraph = () => {
     scales: {
       x: {
         ticks: {
-          callback: function (value, index, values) {
+          callback: function (value: any, index: any, values: any) {
             return window.innerWidth < 500
               ? xLabels[value].slice(0, 5)
               : xLabels[value];
@@ -48,7 +48,7 @@ const WeeklyGraph = () => {
         labels: yLabels,
         ticks: {
           stepSize: 1,
-          callback: function (value, index, values) {
+          callback: function (value: any, index: any, values: any) {
             return yLabels[value];
           },
         },
@@ -157,7 +157,7 @@ const WeeklyGraph = () => {
         </div>
       </div>
       {data !== null ? (
-        <Line options={options} data={data} type={undefined} />
+        <Line options={options} data={data} />
       ) : (
         <Skeleton active />
       )}

@@ -1,5 +1,4 @@
 import { UserContext } from "../../context/UserContext";
-import { ChartOptions } from "chart.js";
 import { useContext, useEffect, useState } from "react";
 import moment from "moment";
 import { CaretLeftOutlined, CaretRightOutlined } from "@ant-design/icons";
@@ -20,7 +19,7 @@ const YearlyGraph = () => {
   const [offset, setOffset] = useState<number>(0);
   const { user, setUser } = useContext(UserContext);
 
-  const options: ChartOptions = {
+  const options: any = {
     plugins: {
       legend: {
         display: true,
@@ -170,7 +169,7 @@ const YearlyGraph = () => {
         </div>
       </div>
       {data !== null ? (
-        <Bar options={options} data={data} type={undefined} />
+        <Bar options={options} data={data} />
       ) : (
         <Skeleton active />
       )}

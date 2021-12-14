@@ -1,7 +1,7 @@
-import firebase from "firebase/app";
-import "firebase/firestore";
-import "firebase/auth";
-import "firebase/analytics";
+import firebase from "firebase/compat/app";
+import "firebase/compat/auth";
+import "firebase/compat/firestore";
+import "firebase/compat/analytics";
 
 if (!firebase.apps.length) {
   firebase.initializeApp({
@@ -17,11 +17,4 @@ if (!firebase.apps.length) {
 }
 
 export const db = firebase.firestore();
-
-// export const auth = firebase.auth();
 export default firebase;
-
-// Setting up google auth provider
-// const provider = new firebase.auth.GoogleAuthProvider();
-// provider.setCustomParameters({ prompt: "select_account" });
-// export const signInWithGoogle = () => auth.signInWithPopup(provider);
