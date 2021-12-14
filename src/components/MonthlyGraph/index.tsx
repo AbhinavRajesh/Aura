@@ -1,5 +1,4 @@
 import { UserContext } from "../../context/UserContext";
-import { ChartOptions } from "chart.js";
 import { useContext, useEffect, useState } from "react";
 import moment from "moment";
 
@@ -20,7 +19,7 @@ const MonthlyGraph = () => {
   const [month, setMonth] = useState<string>(moment().format("MMMM"));
   const { user, setUser } = useContext(UserContext);
 
-  const options: ChartOptions = {
+  const options: any = {
     plugins: {
       legend: {
         display: false,
@@ -133,7 +132,7 @@ const MonthlyGraph = () => {
         </div>
       </div>
       {data !== null ? (
-        <Bar options={options} data={data} type={undefined} />
+        <Bar options={options} data={data} />
       ) : (
         <Skeleton active />
       )}

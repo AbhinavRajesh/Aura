@@ -65,6 +65,12 @@ const Header = () => {
                   >
                     Aura
                   </Link>
+                  <Link
+                    to="/streaks"
+                    className="font-medium text-gray-500 hover:text-gray-900"
+                  >
+                    Streaks
+                  </Link>
                   <a
                     href="https://www.producthunt.com/posts/aura-b260f046-6bf7-439f-8cd7-8521db48ae46?utm_source=badge-featured&utm_medium=badge&utm_souce=badge-aura-b260f046-6bf7-439f-8cd7-8521db48ae46"
                     target="_blank"
@@ -182,6 +188,12 @@ const Header = () => {
                       className="font-medium text-gray-500 hover:text-gray-900 mb-4"
                     >
                       Aura
+                    </Link>
+                    <Link
+                      to="/streaks"
+                      className="font-medium text-gray-500 hover:text-gray-900 mb-4"
+                    >
+                      Streaks
                     </Link>
                     <UserButton />
                     <a

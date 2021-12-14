@@ -1,10 +1,9 @@
-import React from "react";
 import {
   BrowserRouter,
-  Redirect,
+  Navigate,
   Route,
-  Switch,
-  useHistory,
+  Routes,
+  useNavigate,
 } from "react-router-dom";
 import Home from "./pages/index";
 import "./App.scss";
@@ -12,35 +11,40 @@ import { SignedIn, SignedOut, ClerkProvider } from "@clerk/clerk-react";
 import Dashboard from "./pages/dashboard";
 import UserProvider from "./context/UserContext";
 import Aura from "./pages/aura";
+import Streaks from "./pages/streaks";
 
 const App: React.FC = () => {
   return (
     <BrowserRouter>
-      <Switch>
-        <ClerkProviderWithNavigate>
-          <SignedOut>
-            <Route exact path="/" component={Home} />
-          </SignedOut>
-          <SignedIn>
-            <UserProvider>
-              <Route exact path="/" component={Dashboard} />
-              <Route exact path="/aura" component={Aura} />
-            </UserProvider>
-          </SignedIn>
-          <Route render={() => <Redirect to="/" />} />
-        </ClerkProviderWithNavigate>
-      </Switch>
+      <ClerkProviderWithNavigate>
+        <SignedOut>
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route element={<Navigate to="/" />} />
+          </Routes>
+        </SignedOut>
+        <SignedIn>
+          <UserProvider>
+            <Routes>
+              <Route path="/" element={<Dashboard />} />
+              <Route path="/aura" element={<Aura />} />
+              <Route path="/streaks" element={<Streaks />} />
+              <Route element={<Navigate to="/" />} />
+            </Routes>
+          </UserProvider>
+        </SignedIn>
+      </ClerkProviderWithNavigate>
     </BrowserRouter>
   );
 };
 
 const ClerkProviderWithNavigate = ({ children }: { children: any }) => {
-  const { push } = useHistory();
+  const navigate = useNavigate();
   return (
     <ClerkProvider
       frontendApi={process.env.REACT_APP_CLERK_FRONTEND_API}
       navigate={(to) => {
-        return push(to);
+        return navigate(to);
       }}
     >
       {children}
