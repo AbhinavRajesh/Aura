@@ -4,7 +4,7 @@
   "private": true,
   "dependencies": {
     "@clerk/clerk-react": "^2.7.0",
-    "@headlessui/react": "^1.4.2",
+    "@headlessui/react": "^1.4.3",
     "@heroicons/react": "^1.0.5",
     "@testing-library/jest-dom": "^5.16.1",
     "@testing-library/react": "^12.1.2",
