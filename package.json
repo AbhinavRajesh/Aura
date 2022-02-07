@@ -6,7 +6,7 @@
     "@clerk/clerk-react": "^2.9.0",
     "@headlessui/react": "^1.4.3",
     "@heroicons/react": "^1.0.5",
-    "@testing-library/jest-dom": "^5.16.1",
+    "@testing-library/jest-dom": "^5.16.2",
     "@testing-library/react": "^12.1.2",
     "@testing-library/user-event": "^13.5.0",
     "@types/jest": "^27.4.0",
