@@ -1093,18 +1093,18 @@
   resolved "https://registry.npmjs.org/@bcoe/v8-coverage/-/v8-coverage-0.2.3.tgz"
   integrity sha512-0hYQ8SB4Db5zvZB4axdMHGwEaQjkZzFjQiN9LVYvIFB2nSUHW9tYpxWriPrWDASIxiaXax83REcLxuSdnGPZtw==
 
-"@clerk/clerk-react@^2.10.1":
-  version "2.10.1"
-  resolved "https://registry.yarnpkg.com/@clerk/clerk-react/-/clerk-react-2.10.1.tgz#0418159ad6cf72847ef67a1ab7cda9ba462b9267"
-  integrity sha512-ZAK6JDwuQ427ubQ9yyZTNazjZC9VXCADqYiXH3/stZIzCXoIYt7vAGlFiGxtKOFbUv78feHEvMwfMxA5KzGs3g==
+"@clerk/clerk-react@^2.11.4":
+  version "2.11.4"
+  resolved "https://registry.yarnpkg.com/@clerk/clerk-react/-/clerk-react-2.11.4.tgz#c37e3659f606b1542c29b2953eb274198f26665d"
+  integrity sha512-qH3rjHWhhoQ3MfNaS9Borv2QsEuTZ0E4AsvH9ON5HGM4FBueTxuN09b8WJTZdxCpGS1Vp5f0ax7hcmn0+cNgMA==
   dependencies:
-    "@clerk/types" "1.24.1"
+    "@clerk/types" "^1.25.4"
     tslib "^2.3.1"
 
-"@clerk/types@1.24.1":
-  version "1.24.1"
-  resolved "https://registry.yarnpkg.com/@clerk/types/-/types-1.24.1.tgz#d976753589b2895223236c4663e8208bb86a8639"
-  integrity sha512-D9CaQDxX6+RNvD9gbA3QR5FIpMNRCezzIueiH7IIlENh+RHvC0uGeNvEjWPwkfcGBTxU+b1u1PDHupHYE708ew==
+"@clerk/types@^1.25.4":
+  version "1.25.4"
+  resolved "https://registry.yarnpkg.com/@clerk/types/-/types-1.25.4.tgz#b2c524ac73828edbe62c08b1e7de3186dbb6aa2a"
+  integrity sha512-KXwIjF6lP9zEUk8aQVpTDhmxyvpX1GZZPbQzEjL+oZserOe1zKW97RqYatzmkKImUzqyGG+GbMe6bunPnKqA1w==
 
 "@csstools/normalize.css@*":
   version "12.0.0"
