@@ -2122,10 +2122,10 @@
   resolved "https://registry.yarnpkg.com/@types/history/-/history-4.7.11.tgz#56588b17ae8f50c53983a524fc3cc47437969d64"
   integrity sha512-qjDJRrmvBMiTx+jyLxvLfJU7UznFuokDv4f3WRuriHKERccVpFU+8XMQUAbDzoiJCsmexxRExQeMwwCdamSKDA==
 
-"@types/howler@^2.2.4":
-  version "2.2.4"
-  resolved "https://registry.npmjs.org/@types/howler/-/howler-2.2.4.tgz"
-  integrity sha512-/Bs5TyNUWuXPnWe3RB6bS6giQzGHRXmSycq4Mo/2i4C6zwfR7foaAAx1Vo5pMyOAT/ufTfU6WZQHhdvCDBKRig==
+"@types/howler@^2.2.6":
+  version "2.2.6"
+  resolved "https://registry.yarnpkg.com/@types/howler/-/howler-2.2.6.tgz#84389d2d09c1cdfaa99514cbe9f0363ae091cc5c"
+  integrity sha512-9cLZICB6CFNIbwk0kJGvIvlEVI7D0dbbtcj00Uin81jQSMeKafaLq7r3v0RWQOX8BkM+KqboJaOeH5S/qpNqJg==
 
 "@types/html-minifier-terser@^6.0.0":
   version "6.1.0"
