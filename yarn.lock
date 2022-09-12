@@ -1093,18 +1093,21 @@
   resolved "https://registry.npmjs.org/@bcoe/v8-coverage/-/v8-coverage-0.2.3.tgz"
   integrity sha512-0hYQ8SB4Db5zvZB4axdMHGwEaQjkZzFjQiN9LVYvIFB2nSUHW9tYpxWriPrWDASIxiaXax83REcLxuSdnGPZtw==
 
-"@clerk/clerk-react@^2.10.1":
-  version "2.10.1"
-  resolved "https://registry.yarnpkg.com/@clerk/clerk-react/-/clerk-react-2.10.1.tgz#0418159ad6cf72847ef67a1ab7cda9ba462b9267"
-  integrity sha512-ZAK6JDwuQ427ubQ9yyZTNazjZC9VXCADqYiXH3/stZIzCXoIYt7vAGlFiGxtKOFbUv78feHEvMwfMxA5KzGs3g==
+"@clerk/clerk-react@^4.0.10":
+  version "4.0.10"
+  resolved "https://registry.yarnpkg.com/@clerk/clerk-react/-/clerk-react-4.0.10.tgz#e5802425bfd2e0279878a7a120a4823ae6a48fa9"
+  integrity sha512-BtZSNtwAU4g8+/Y0u+3K+94mmpv9qHzi9b5BuqSYcPZFr/nWiveAkW+33VcJBTkP2fw5clSTbVJWH/G2C3qgjw==
   dependencies:
-    "@clerk/types" "1.24.1"
+    "@clerk/types" "^3.4.2"
+    swr "^1.3.0"
     tslib "^2.3.1"
 
-"@clerk/types@1.24.1":
-  version "1.24.1"
-  resolved "https://registry.yarnpkg.com/@clerk/types/-/types-1.24.1.tgz#d976753589b2895223236c4663e8208bb86a8639"
-  integrity sha512-D9CaQDxX6+RNvD9gbA3QR5FIpMNRCezzIueiH7IIlENh+RHvC0uGeNvEjWPwkfcGBTxU+b1u1PDHupHYE708ew==
+"@clerk/types@^3.4.2":
+  version "3.4.2"
+  resolved "https://registry.yarnpkg.com/@clerk/types/-/types-3.4.2.tgz#49d6b5870a060973d91a1c94faa91b91e7e5a986"
+  integrity sha512-Xf2QKgKffPru9j0KcT5trRzttVGdqJxJ3AtUlL5RkbWOHT9rIVG0OCtCb3FBDRotVKk3jyBOFCmPRTqPyMKmOw==
+  dependencies:
+    csstype "^3.1.0"
 
 "@csstools/normalize.css@*":
   version "12.0.0"
@@ -3731,6 +3734,11 @@ csstype@^3.0.2:
   version "3.0.10"
   resolved "https://registry.npmjs.org/csstype/-/csstype-3.0.10.tgz"
   integrity sha512-2u44ZG2OcNUO9HDp/Jl8C07x6pU/eTR3ncV91SiK3dhG9TWvRVsCoJw14Ckx5DgWkzGA3waZWO3d7pgqpUI/XA==
+
+csstype@^3.1.0:
+  version "3.1.0"
+  resolved "https://registry.yarnpkg.com/csstype/-/csstype-3.1.0.tgz#4ddcac3718d787cf9df0d1b7d15033925c8f29f2"
+  integrity sha512-uX1KG+x9h5hIJsaKR9xHUeUraxf8IODOwq9JLNPq6BwB04a/xgpq3rcx47l5BZu5zBPlgD342tdke3Hom/nJRA==
 
 damerau-levenshtein@^1.0.7:
   version "1.0.7"
@@ -9022,6 +9030,11 @@ svgo@^2.7.0:
     csso "^4.2.0"
     picocolors "^1.0.0"
     stable "^0.1.8"
+
+swr@^1.3.0:
+  version "1.3.0"
+  resolved "https://registry.yarnpkg.com/swr/-/swr-1.3.0.tgz#c6531866a35b4db37b38b72c45a63171faf9f4e8"
+  integrity sha512-dkghQrOl2ORX9HYrMDtPa7LTVHJjCTeZoB1dqTbnnEDlSvN8JEKpYIYurDfvbQFUUS8Cg8PceFVZNkW0KNNYPw==
 
 symbol-tree@^3.2.4:
   version "3.2.4"
