@@ -44,7 +44,7 @@
 
 Introducing [Aura](https://aura-ar.vercel.app), an easy to use mood tracking app that takes your daily life's mood into account. It allows you to understand yourself better and helps you maintain an even mood throughout the day. The app has various features such as **graphs, statistics, insights, and relaxing sounds to improve you mood.** And the best part? It's free!
 
-<a href="https://blog.abhinavrajesh.xyz/introducing-aura-see-your-mood-in-a-whole-new-light" target="_blank" rel="noopener noreferrer">More on it at my blog</a>
+<a href="https://blog.abhinavrajesh.com/introducing-aura-see-your-mood-in-a-whole-new-light" target="_blank" rel="noopener noreferrer">More on it at my blog</a>
 
 <b>Here is a quick sneakpeek of the app!</b>
 
