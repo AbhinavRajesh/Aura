@@ -5,7 +5,7 @@
   "dependencies": {
     "@clerk/clerk-react": "^2.10.1",
     "@headlessui/react": "^1.4.3",
-    "@heroicons/react": "^1.0.5",
+    "@heroicons/react": "^2.0.14",
     "@testing-library/jest-dom": "^5.16.2",
     "@testing-library/react": "^12.1.2",
     "@testing-library/user-event": "^13.5.0",
