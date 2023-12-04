@@ -42,10 +42,9 @@ const ClerkProviderWithNavigate = ({ children }: { children: any }) => {
   const navigate = useNavigate();
   return (
     <ClerkProvider
-      frontendApi={process.env.REACT_APP_CLERK_FRONTEND_API}
-      navigate={(to) => {
-        return navigate(to);
-      }}
+      publishableKey={process.env.REACT_APP_CLERK_PUBLISHABLE_KEY!}
+      frontendApi={undefined}
+      navigate={(to) => navigate(to)}
     >
       {children}
     </ClerkProvider>

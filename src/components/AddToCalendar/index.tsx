@@ -12,7 +12,7 @@ interface ModalData {
 }
 
 const AddToCalendar = () => {
-  const { firstName } = useUser();
+  const { user: clerkUser } = useUser();
   const [modalData, setModalData] = useState<ModalData | null>(null);
   const [modalVisibility, setModalVisibility] = useState<boolean>(false);
   const [isEdit, setIsEdit] = useState<boolean>(false);
@@ -53,7 +53,7 @@ const AddToCalendar = () => {
         <h3 className="font-bold text-xl md:text-4xl text-center">
           Hey,{" "}
           <span className="text-blue-600 hover:text-blue-500 font-semibold">
-            {firstName} 👋
+            {clerkUser?.firstName} 👋
           </span>
         </h3>
         <p className="text-base md:text-lg mt-4">

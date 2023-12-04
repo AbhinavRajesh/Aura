@@ -1,4 +1,4 @@
-import { useUser } from "@clerk/clerk-react";
+import { useUser, useAuth } from "@clerk/clerk-react";
 import {
   useState,
   createContext,
@@ -22,11 +22,13 @@ export const UserContext = createContext<ContextProps>({
 const UserProvider = (props: any) => {
   const [user, setUser] = useState<User | null>(null);
 
-  const clerkUser = useUser();
+  const { getToken } = useAuth();
+
+  const { user: clerkUser } = useUser();
 
   const getUser = async () => {
-    const email: string = clerkUser.emailAddresses[0].emailAddress;
-    const customToken = await clerkUser.getToken("firebase");
+    const email = clerkUser?.emailAddresses?.[0]?.emailAddress as string;
+    const customToken = await getToken({ template: "integration_firebase" });
     await firebase.auth().signInWithCustomToken(customToken as any);
 
     if (email) {

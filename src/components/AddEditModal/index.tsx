@@ -41,7 +41,7 @@ const EditModal = ({
   const [displayRecommendation, setDisplayRecommendation] =
     useState<boolean>(false);
 
-  const { emailAddresses } = useUser();
+  const { user: clerkUser } = useUser();
   const { user, setUser } = useContext(UserContext);
 
   useEffect(() => {
@@ -93,7 +93,7 @@ const EditModal = ({
       }
       await db
         .collection("users")
-        .doc(emailAddresses[0].emailAddress)
+        .doc(clerkUser?.emailAddresses?.[0]?.emailAddress)
         .update(updatedUser);
       setUser!(updatedUser);
       message.success("Mood added succesfully! Carry on with your day :)");
